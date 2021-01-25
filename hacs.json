@@ -1,0 +1,7 @@
+{
+    "name": "美的中央空调",
+    "domains": ["climate"],
+    "render_readme": false,
+    "homeassistant": "0.110",
+    "country": ["CN"]
+  }
