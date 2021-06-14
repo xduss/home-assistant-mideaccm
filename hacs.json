@@ -1,6 +1,5 @@
 {
     "name": "美的中央空调",
     "domains": ["climate"],
-    "render_readme": false,
-    "country": ["CN"]
+    "render_readme": false
   }
