@@ -23,7 +23,7 @@ from homeassistant.const import (CONF_NAME, CONF_HOST, CONF_PORT,
 import homeassistant.helpers.config_validation as cv
 import xmltodict
 import requests
-REQUIREMENTS = ['xmltodict==0.11.0']
+#REQUIREMENTS = ['xmltodict==0.11.0']
 
 DOMAIN = 'ccm15'
 _LOGGER = logging.getLogger(__name__)
