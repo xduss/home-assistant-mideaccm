@@ -1,6 +1,7 @@
 {
     "domain": "ccm15",
     "name": "ccm15",
+    "config_flow": true,
     "documentation": "https://github.com/kylinfedora/home-assistant-mideaccm",
     "dependencies": [],
     "version": "v1.2",
