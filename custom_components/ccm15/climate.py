@@ -192,6 +192,7 @@ class Thermostat(ClimateEntity):
         """Initialize the thermostat."""
         self._name = '{}_{}'.format(name, ac_name)
         self._ac_name = ac_name
+        self._unique_id = ac_name
         self._ac_id = 2 ** (int(ac_name.strip('a')))
         self._host = host
         self._port = port
