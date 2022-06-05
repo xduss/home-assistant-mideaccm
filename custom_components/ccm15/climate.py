@@ -192,7 +192,6 @@ class Thermostat(ClimateEntity):
     def __init__(self, name, ac_name, host, port, acdata):
         """Initialize the thermostat."""
         self._name = '{}_{}'.format(name, ac_name)
-        self._unique_id = ac_name
         self._ac_name = ac_name
         self._unique_id = ac_name
         self._ac_id = 2 ** (int(ac_name.strip('a')))
