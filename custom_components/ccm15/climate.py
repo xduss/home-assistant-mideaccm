@@ -34,6 +34,7 @@ BASE_URL = 'http://{0}:{1}{2}'
 CONF_URL_STATUS = '/status.xml'
 CONF_URL_CTRL = '/ctrl.xml'
 
+CONF_UNIQUE_ID = 'unique_id'
 ATTR_MODE = 'mode'
 CONST_MODE_FAN_AUTO = 'auto'
 CONST_MODE_FAN_LOW = 'low'
@@ -191,6 +192,7 @@ class Thermostat(ClimateEntity):
     def __init__(self, name, ac_name, host, port, acdata):
         """Initialize the thermostat."""
         self._name = '{}_{}'.format(name, ac_name)
+        self._unique_id = ac_name
         self._ac_name = ac_name
         self._unique_id = ac_name
         self._ac_id = 2 ** (int(ac_name.strip('a')))
@@ -202,6 +204,11 @@ class Thermostat(ClimateEntity):
         self.updateWithAcdata(acdata)
         _LOGGER.debug("Init called")
         self.update()
+        
+    @property
+    def unique_id(self):
+        """Return a unique ID."""
+        return self._unique_id
 
     @property
     def supported_features(self):
