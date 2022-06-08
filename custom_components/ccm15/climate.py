@@ -293,8 +293,7 @@ class Thermostat(ClimateEntity):
         else:
             self._current_settemp = int(math.ceil(temperature)) if temperature > self._current_settemp else int(math.floor(temperature))
             self.setStates()
-            self.async_write_ha_state()
-
+            self.schedule_update_ha_state()
     @property
     def hvac_mode(self):
         """Return the current state of the thermostat."""
@@ -308,7 +307,7 @@ class Thermostat(ClimateEntity):
             self._current_fan = self._current_setfan
         self._current_state = hvac_mode
         self.setStates()
-        self.async_write_ha_state()
+        self.schedule_update_ha_state()
         return
 
     @property
@@ -336,7 +335,7 @@ class Thermostat(ClimateEntity):
             self._current_setfan = self._current_fan
 
         self.setStates()
-        self.async_write_ha_state()
+        self.schedule_update_ha_state()
         return
 
     @property
