@@ -239,13 +239,22 @@ class Thermostat(ClimateEntity):
         """Set new target states."""
         state_cmd = CONST_STATE_CMD_MAP[self._current_state]
         fan_cmd = CONST_FAN_CMD_MAP[self._current_fan]
+        if (int(self._ac_name.strip('a'))) > 32: # when ac id >31
+            ac0_cmd = 0
+            ac1_cmd = 2 ** ((int(self._ac_name.strip('a'))) - 32)
+        elif (int(self._ac_name.strip('a'))) == 32:
+            ac0_cmd = 0
+            ac1_cmd = 1
+        else:
+            ac0_cmd = self._ac_id
+            ac1_cmd = 0
 
         url = BASE_URL.format(
             self._host,
             self._port,
             CONF_URL_CTRL +
-            '?ac0=' + str(self._ac_id) +
-            '&ac1=0' +
+            '?ac0=0' + str(ac0_cmd) +
+            '&ac1=' + str(ac1_cmd) +
             '&mode=' + str(state_cmd) +
             '&fan=' + str(fan_cmd) +
             '&temp=' + str(self._current_settemp)
@@ -293,7 +302,7 @@ class Thermostat(ClimateEntity):
         else:
             self._current_settemp = int(math.ceil(temperature)) if temperature > self._current_settemp else int(math.floor(temperature))
             self.setStates()
-            self.schedule_update_ha_state()
+            #self.schedule_update_ha_state()
     @property
     def hvac_mode(self):
         """Return the current state of the thermostat."""
@@ -307,7 +316,7 @@ class Thermostat(ClimateEntity):
             self._current_fan = self._current_setfan
         self._current_state = hvac_mode
         self.setStates()
-        self.schedule_update_ha_state()
+        #self.schedule_update_ha_state()
         return
 
     @property
@@ -335,7 +344,7 @@ class Thermostat(ClimateEntity):
             self._current_setfan = self._current_fan
 
         self.setStates()
-        self.schedule_update_ha_state()
+        #self.schedule_update_ha_state()
         return
 
     @property
